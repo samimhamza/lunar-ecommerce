@@ -104,7 +104,7 @@ class LunarServiceProvider extends ServiceProvider
         'urls',
     ];
 
-    protected $root = __DIR__.'/..';
+    protected $root = __DIR__ . '/..';
 
     /**
      * Register any application services.
@@ -115,7 +115,7 @@ class LunarServiceProvider extends ServiceProvider
             $this->mergeConfigFrom("{$this->root}/config/$config.php", "lunar.$config");
         });
 
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'lunar');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'lunar');
 
         $this->registerAddonManifest();
 
@@ -185,8 +185,8 @@ class LunarServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (! config('lunar.database.disable_migrations', false)) {
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        if (!config('lunar.database.disable_migrations', false)) {
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
 
         $this->registerObservers();
@@ -201,11 +201,11 @@ class LunarServiceProvider extends ServiceProvider
             });
 
             $this->publishes([
-                __DIR__.'/../resources/lang' => lang_path('vendor/lunar'),
+                __DIR__ . '/../resources/lang' => lang_path('vendor/lunar'),
             ], 'lunar.translation');
 
             $this->publishes([
-                __DIR__.'/../database/migrations/' => database_path('migrations'),
+                __DIR__ . '/../database/migrations/' => database_path('migrations'),
             ], 'lunar.migrations');
 
             $this->commands([
@@ -252,7 +252,7 @@ class LunarServiceProvider extends ServiceProvider
         $this->app->instance(Manifest::class, new Manifest(
             new Filesystem(),
             $this->app->basePath(),
-            $this->app->bootstrapPath().'/cache/lunar_addons.php'
+            $this->app->bootstrapPath() . '/cache/lunar_addons.php'
         ));
     }
 
@@ -291,7 +291,7 @@ class LunarServiceProvider extends ServiceProvider
     {
         Channel::observe(ChannelObserver::class);
         CustomerGroup::observe(CustomerGroupObserver::class);
-        Language::observe(LanguageObserver::class);
+        // Language::observe(LanguageObserver::class);
         Currency::observe(CurrencyObserver::class);
         Url::observe(UrlObserver::class);
         Collection::observe(CollectionObserver::class);

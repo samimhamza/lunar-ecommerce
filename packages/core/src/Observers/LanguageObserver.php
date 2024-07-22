@@ -60,7 +60,7 @@ class LanguageObserver
         if ($savedLanguage->default) {
             Language::withoutEvents(function () use ($savedLanguage) {
                 Language::whereDefault(true)->where('id', '!=', $savedLanguage->id)
-                    ->when($savedLanguage->tenant_id, fn ($q) => $q->where('tenant_id', $savedLanguage->tenant_id))
+                    ->where('tenant_id', $savedLanguage->tenant_id)
                     ->update([
                         'default' => false,
                     ]);

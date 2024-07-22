@@ -55,11 +55,7 @@ class ChannelObserver
     {
         // Wrap here so we avoid a query if it's not been set to default.
         if ($savedChannel->default) {
-            $channel = Channel::whereDefault(true)->where('id', '!=', $savedChannel->id);
-            if ($savedChannel->tenant_id) {
-                $channel = $channel->where('tenant_id', $savedChannel->tenant_id);
-            }
-            $channel->first();
+            $channel = Channel::whereDefault(true)->where('id', '!=', $savedChannel->id)->where('tenant_id', $savedChannel->tenant_id)->first();
 
             if ($channel) {
                 $channel->default = false;

@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'tax_zone_postcodes', function (Blueprint $table) {
+        Schema::create($this->prefix . 'tax_zone_postcodes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tax_zone_id')->nullable()->constrained($this->prefix.'tax_zones');
-            $table->foreignId('country_id')->nullable()->constrained($this->prefix.'countries');
+            $table->foreignId('tax_zone_id')->nullable()->constrained($this->prefix . 'tax_zones');
+            $table->foreignId('country_id')->nullable()->constrained($this->prefix . 'countries');
             $table->string('postcode', 20)->index();
             $table->timestamps();
         });
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'tax_zone_postcodes');
+        Schema::dropIfExists($this->prefix . 'tax_zone_postcodes');
     }
 };

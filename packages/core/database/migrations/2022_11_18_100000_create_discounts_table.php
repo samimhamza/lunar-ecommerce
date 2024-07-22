@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'discounts', function (Blueprint $table) {
+        Schema::create($this->prefix . 'discounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('handle')->unique();
-            $table->string('coupon')->nullable()->unique();
+            $table->string('handle'); // ->unique();
+            $table->string('coupon')->nullable(); // ->unique();
             $table->string('type')->index();
             $table->dateTime('starts_at')->index();
             $table->dateTime('ends_at')->nullable()->index();
@@ -23,11 +23,14 @@ return new class extends Migration
             $table->string('restriction')->index()->nullable();
             $table->json('data')->nullable();
             $table->timestamps();
+            $table->foreignUuid('tenant_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['handle', 'tenant_id']);
+            $table->unique(['coupon', 'tenant_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'discounts');
+        Schema::dropIfExists($this->prefix . 'discounts');
     }
 };

@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'product_option_values', function (Blueprint $table) {
+        Schema::create($this->prefix . 'product_option_values', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('product_option_id')->constrained($this->prefix.'product_options');
+            $table->foreignId('product_option_id')->constrained($this->prefix . 'product_options');
             $table->json('name');
             $table->timestamps();
         });
@@ -18,6 +18,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'product_option_values');
+        Schema::dropIfExists($this->prefix . 'product_option_values');
     }
 };

@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'order_lines', function (Blueprint $table) {
+        Schema::create($this->prefix . 'order_lines', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('order_id')->constrained($this->prefix.'orders');
+            $table->foreignId('order_id')->constrained($this->prefix . 'orders');
             $table->morphs('purchasable');
             $table->string('type')->index();
             $table->string('description');
@@ -32,6 +32,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'order_lines');
+        Schema::dropIfExists($this->prefix . 'order_lines');
     }
 };

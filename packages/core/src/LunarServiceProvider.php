@@ -291,7 +291,7 @@ class LunarServiceProvider extends ServiceProvider
     {
         Channel::observe(ChannelObserver::class);
         CustomerGroup::observe(CustomerGroupObserver::class);
-        // Language::observe(LanguageObserver::class);
+        Language::observe(LanguageObserver::class);
         Currency::observe(CurrencyObserver::class);
         Url::observe(UrlObserver::class);
         Collection::observe(CollectionObserver::class);

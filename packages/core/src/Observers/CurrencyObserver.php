@@ -55,7 +55,12 @@ class CurrencyObserver
     {
         // Wrap here so we avoid a query if it's not been set to default.
         if ($savedCurrency->default) {
-            $currencies = Currency::whereDefault(true)->where('id', '!=', $savedCurrency->id)->get();
+            $currencies = Currency::whereDefault(true)->where('id', '!=', $savedCurrency->id);
+
+            if ($savedCurrency->tenant_id) {
+                $currencies = $currencies->where('tenant_id', $savedCurrency->tenant_id);
+            }
+            $currencies->get();
 
             foreach ($currencies as $currency) {
                 $currency->default = false;

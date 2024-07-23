@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMedia as TraitsHasMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
 
 /**
  * @property int $id
@@ -15,6 +16,13 @@ use Spatie\MediaLibrary\HasMedia;
 class Asset extends BaseModel implements HasMedia
 {
     use TraitsHasMedia;
+
+    use BelongsToPrimaryModel;
+
+    public function getRelationshipToPrimaryModel(): string
+    {
+        return 'file';
+    }
 
     /**
      * Define which attributes should be

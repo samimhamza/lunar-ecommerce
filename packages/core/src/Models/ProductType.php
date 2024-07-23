@@ -9,6 +9,7 @@ use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasAttributes;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\ProductTypeFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -21,6 +22,7 @@ class ProductType extends BaseModel
     use HasAttributes;
     use HasFactory;
     use HasMacros;
+    use BelongsToTenant;
 
     /**
      * Return a new factory instance for the model.

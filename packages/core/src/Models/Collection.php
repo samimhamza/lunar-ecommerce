@@ -18,6 +18,7 @@ use Lunar\Base\Traits\HasUrls;
 use Lunar\Base\Traits\Searchable;
 use Lunar\Database\Factories\CollectionFactory;
 use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -43,8 +44,10 @@ class Collection extends BaseModel implements SpatieHasMedia
         HasUrls,
         NodeTrait,
         Searchable {
-            NodeTrait::usesSoftDelete insteadof Searchable;
-        }
+        NodeTrait::usesSoftDelete insteadof Searchable;
+    }
+    use BelongsToTenant;
+
 
     /**
      * Define which attributes should be cast.

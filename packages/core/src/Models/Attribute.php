@@ -13,6 +13,7 @@ use Lunar\Base\Traits\HasMacros;
 use Lunar\Base\Traits\HasTranslations;
 use Lunar\Database\Factories\AttributeFactory;
 use Lunar\Facades\DB;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -38,12 +39,14 @@ class Attribute extends BaseModel
     use HasFactory;
     use HasMacros;
     use HasTranslations;
+    use BelongsToTenant;
+
 
     public static function boot()
     {
         static::deleting(function (Model $model) {
             DB::table(
-                config('lunar.database.table_prefix').'attributables'
+                config('lunar.database.table_prefix') . 'attributables'
             )->where('attribute_id', '=', $model->id)->delete();
         });
         parent::boot();

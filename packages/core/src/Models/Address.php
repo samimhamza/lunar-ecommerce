@@ -9,6 +9,8 @@ use Lunar\Base\Addressable;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\AddressFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
+
 
 /**
  * @property int $id
@@ -37,6 +39,13 @@ use Lunar\Database\Factories\AddressFactory;
 class Address extends BaseModel implements Addressable
 {
     use HasFactory, HasMacros;
+
+    use BelongsToPrimaryModel;
+
+    public function getRelationshipToPrimaryModel(): string
+    {
+        return 'customer';
+    }
 
     /**
      * Return a new factory instance for the model.

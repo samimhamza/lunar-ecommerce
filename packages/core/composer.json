@@ -41,6 +41,7 @@
         "kalnoy/nestedset": "^v6.x-dev",
         "doctrine/dbal": "^3.6",
         "spatie/laravel-blink": "^1.7",
-        "lukascivil/treewalker": "0.9.1"
+        "lukascivil/treewalker": "0.9.1",
+        "stancl/tenancy": "^3.8"
     }
 }

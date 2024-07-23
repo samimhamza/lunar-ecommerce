@@ -15,6 +15,7 @@ use Lunar\Base\Traits\HasTranslations;
 use Lunar\Base\Traits\Searchable;
 use Lunar\Database\Factories\ProductOptionFactory;
 use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -32,6 +33,8 @@ class ProductOption extends BaseModel implements SpatieHasMedia
     use HasMedia;
     use HasTranslations;
     use Searchable;
+    use BelongsToTenant;
+
 
     /**
      * Define which attributes should be cast.

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\TagFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -18,6 +19,8 @@ class Tag extends BaseModel
 {
     use HasFactory;
     use HasMacros;
+    use BelongsToTenant;
+
 
     /**
      * Return a new factory instance for the model.

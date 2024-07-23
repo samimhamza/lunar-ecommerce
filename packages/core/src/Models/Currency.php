@@ -9,6 +9,7 @@ use Lunar\Base\Traits\HasDefaultRecord;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Base\Traits\LogsActivity;
 use Lunar\Database\Factories\CurrencyFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -27,6 +28,8 @@ class Currency extends BaseModel
     use HasFactory;
     use HasMacros;
     use LogsActivity;
+    use BelongsToTenant;
+
 
     /**
      * Define which attributes should be

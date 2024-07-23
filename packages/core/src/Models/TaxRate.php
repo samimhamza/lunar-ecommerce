@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\TaxRateFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
 
 /**
  * @property int $id
@@ -21,6 +22,12 @@ class TaxRate extends BaseModel
 {
     use HasFactory;
     use HasMacros;
+    use BelongsToPrimaryModel;
+
+    public function getRelationshipToPrimaryModel(): string
+    {
+        return 'taxZone';
+    }
 
     /**
      * Return a new factory instance for the model.

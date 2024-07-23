@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\UrlFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
 
 /**
  * @property int $id
@@ -24,6 +25,12 @@ class Url extends BaseModel
 {
     use HasFactory;
     use HasMacros;
+    use BelongsToPrimaryModel;
+
+    public function getRelationshipToPrimaryModel(): string
+    {
+        return 'language';
+    }
 
     /**
      * Return a new factory instance for the model.

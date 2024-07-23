@@ -16,6 +16,7 @@ use Lunar\Base\Traits\LogsActivity;
 use Lunar\Base\Traits\Searchable;
 use Lunar\Database\Factories\BrandFactory;
 use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -34,6 +35,8 @@ class Brand extends BaseModel implements SpatieHasMedia
         HasUrls,
         LogsActivity,
         Searchable;
+    use BelongsToTenant;
+
 
     /**
      * {@inheritDoc}

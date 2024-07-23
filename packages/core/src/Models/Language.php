@@ -8,6 +8,7 @@ use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasDefaultRecord;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\LanguageFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -22,6 +23,7 @@ class Language extends BaseModel
     use HasDefaultRecord;
     use HasFactory;
     use HasMacros;
+    use BelongsToTenant;
 
     /**
      * Return a new factory instance for the model.

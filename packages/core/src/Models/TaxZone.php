@@ -9,6 +9,7 @@ use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasDefaultRecord;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\TaxZoneFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -25,6 +26,8 @@ class TaxZone extends BaseModel
     use HasDefaultRecord;
     use HasFactory;
     use HasMacros;
+    use BelongsToTenant;
+
 
     protected static function booted(): void
     {

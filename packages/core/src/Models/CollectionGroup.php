@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\CollectionGroupFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -19,6 +20,8 @@ class CollectionGroup extends BaseModel
 {
     use HasFactory;
     use HasMacros;
+    use BelongsToTenant;
+
 
     protected $guarded = [];
 

@@ -9,6 +9,7 @@ use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Base\Traits\HasTranslations;
 use Lunar\Database\Factories\AttributeGroupFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -24,6 +25,8 @@ class AttributeGroup extends BaseModel
     use HasFactory;
     use HasMacros;
     use HasTranslations;
+    use BelongsToTenant;
+
 
     /**
      * Return a new factory instance for the model.

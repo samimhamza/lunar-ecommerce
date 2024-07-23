@@ -27,6 +27,7 @@ use Lunar\Database\Factories\ProductFactory;
 use Lunar\Jobs\Products\Associations\Associate;
 use Lunar\Jobs\Products\Associations\Dissociate;
 use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -51,6 +52,8 @@ class Product extends BaseModel implements SpatieHasMedia
     use LogsActivity;
     use Searchable;
     use SoftDeletes;
+    use BelongsToTenant;
+
 
     /**
      * Return a new factory instance for the model.
@@ -131,7 +134,7 @@ class Product extends BaseModel implements SpatieHasMedia
     {
         return $this->belongsToMany(
             \Lunar\Models\Collection::class,
-            config('lunar.database.table_prefix').'collection_product'
+            config('lunar.database.table_prefix') . 'collection_product'
         )->withPivot(['position'])->withTimestamps();
     }
 

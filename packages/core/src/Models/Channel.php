@@ -12,6 +12,7 @@ use Lunar\Base\Traits\HasDefaultRecord;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Base\Traits\LogsActivity;
 use Lunar\Database\Factories\ChannelFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -30,6 +31,7 @@ class Channel extends BaseModel
     use HasMacros;
     use LogsActivity;
     use SoftDeletes;
+    use BelongsToTenant;
 
     public $casts = [
         'enabled' => 'boolean',

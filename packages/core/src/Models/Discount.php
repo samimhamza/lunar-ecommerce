@@ -12,6 +12,7 @@ use Lunar\Base\Traits\HasChannels;
 use Lunar\Base\Traits\HasCustomerGroups;
 use Lunar\Base\Traits\HasTranslations;
 use Lunar\Database\Factories\DiscountFactory;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 /**
  * @property int $id
@@ -34,6 +35,9 @@ class Discount extends BaseModel
         HasCustomerGroups,
         HasFactory,
         HasTranslations;
+
+    use BelongsToTenant;
+
 
     protected $guarded = [];
 
@@ -66,7 +70,7 @@ class Discount extends BaseModel
 
     public function getStatusAttribute()
     {
-        $active = $this->starts_at?->isPast() && ! $this->ends_at?->isPast();
+        $active = $this->starts_at?->isPast() && !$this->ends_at?->isPast();
         $expired = $this->ends_at?->isPast();
         $future = $this->starts_at?->isFuture();
 
@@ -203,7 +207,8 @@ class Discount extends BaseModel
 
         return $query->where(
             fn ($subQuery) => $subQuery->whereDoesntHave('purchasables', fn ($query) => $query->when($types, fn ($query) => $query->whereIn('type', $types)))
-                ->orWhereHas('purchasables',
+                ->orWhereHas(
+                    'purchasables',
                     fn ($relation) => $relation->whereIn('purchasable_id', $productIds)
                         ->wherePurchasableType(Product::class)
                         ->when(
@@ -227,7 +232,8 @@ class Discount extends BaseModel
 
         return $query->where(
             fn ($subQuery) => $subQuery->whereDoesntHave('purchasables', fn ($query) => $query->when($types, fn ($query) => $query->whereIn('type', $types)))
-                ->orWhereHas('purchasables',
+                ->orWhereHas(
+                    'purchasables',
                     fn ($relation) => $relation->whereIn('purchasable_id', $variantIds)
                         ->wherePurchasableType(ProductVariant::class)
                         ->when(

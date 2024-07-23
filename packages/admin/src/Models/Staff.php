@@ -12,6 +12,8 @@ use Illuminate\Notifications\Notifiable;
 use Lunar\Admin\Database\Factories\StaffFactory;
 use Lunar\Base\Traits\HasModelExtending;
 use Spatie\Permission\Traits\HasRoles;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
+
 
 class Staff extends Authenticatable implements FilamentUser, HasName
 {
@@ -20,6 +22,7 @@ class Staff extends Authenticatable implements FilamentUser, HasName
     use Notifiable;
     use SoftDeletes;
     use HasModelExtending;
+    use BelongsToTenant;
 
     /**
      * Return a new factory instance for the model.

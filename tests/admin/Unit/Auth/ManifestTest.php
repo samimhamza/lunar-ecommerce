@@ -1,9 +1,10 @@
 <?php
 
 use Lunar\Admin\Auth\Manifest;
+use Lunar\Admin\Models\Permission;
+use Lunar\Admin\Models\Role;
 use Lunar\Admin\Support\Facades\LunarPanel;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+
 
 uses(\Lunar\Tests\Admin\Feature\Filament\TestCase::class)
     ->group('unit.manifest');
@@ -83,7 +84,7 @@ test('manifest can get grouped permissions', function () {
         ->toBeIterable()
         ->not->toBeEmpty();
 
-    $notParent = $permissions->first(fn ($perm) => ! count($perm->children));
+    $notParent = $permissions->first(fn ($perm) => !count($perm->children));
 
     expect($notParent->children)
         ->toBeIterable()
@@ -136,7 +137,6 @@ test('manifest can set admin', function () {
 
     expect($newAdmin)
         ->not->toMatchArray($currentAdmin);
-
 });
 
 test('manifest can get roles without admin', function () {

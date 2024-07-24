@@ -7,10 +7,10 @@ use Exception;
 use Filament\Forms\Components\Field;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Collection;
+use Lunar\Admin\Models\Role;
 use Lunar\Admin\Models\Staff;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 use Lunar\Admin\Support\Facades\LunarPanel;
-use Spatie\Permission\Models\Role;
 
 class PermissionSelector extends Field
 {
@@ -35,7 +35,7 @@ class PermissionSelector extends Field
         });
 
         $this->saveRelationshipsUsing(static function (PermissionSelector $component, ?array $state) {
-            if (! is_array($state)) {
+            if (!is_array($state)) {
                 $state = [];
             }
 
@@ -121,7 +121,7 @@ class PermissionSelector extends Field
             }
         }
 
-        if (! $isUpdated) {
+        if (!$isUpdated) {
             foreach ($groupedPermissions as $permission) {
                 if (isset($rolesPermissions[$permission->handle])) {
                     $state[$permission->handle] = null;
@@ -148,8 +148,10 @@ class PermissionSelector extends Field
                 // determine if has child
                 $hasChild = false;
                 foreach ($permission->children as $childPerm) {
-                    if (isset($rolesPermissions[$childPerm->handle])
-                        || (bool) $state[$childPerm->handle]) {
+                    if (
+                        isset($rolesPermissions[$childPerm->handle])
+                        || (bool) $state[$childPerm->handle]
+                    ) {
                         $hasChild = true;
 
                         break;
@@ -198,7 +200,7 @@ class PermissionSelector extends Field
 
         $traits = trait_uses_recursive($record);
 
-        if (! in_array(\Spatie\Permission\Traits\HasRoles::class, $traits)) {
+        if (!in_array(\Spatie\Permission\Traits\HasRoles::class, $traits)) {
             throw new Exception('Not implemented \Spatie\Permission\Traits\HasRoles');
         }
 
@@ -243,7 +245,6 @@ class PermissionSelector extends Field
 
                 $permissions[$permission->name][$role->handle] = $role->transLabel;
             }
-
         }
 
         return $permissions;

@@ -3,9 +3,10 @@
 use Livewire\Livewire;
 use Lunar\Admin\Filament\Resources\StaffResource;
 use Lunar\Admin\Filament\Resources\StaffResource\Pages\EditStaff;
+use Lunar\Admin\Models\Role;
 use Lunar\Admin\Models\Staff;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
-use Spatie\Permission\Models\Role;
+
 
 uses(\Lunar\Tests\Admin\Feature\Filament\TestCase::class)
     ->group('resource.staff');

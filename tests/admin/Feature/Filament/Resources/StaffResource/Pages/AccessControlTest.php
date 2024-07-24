@@ -4,10 +4,11 @@ use Livewire\Livewire;
 use Lunar\Admin\Filament\Resources\StaffResource;
 use Lunar\Admin\Filament\Resources\StaffResource\Pages\AccessControl;
 use Lunar\Admin\Filament\Resources\StaffResource\Pages\ListStaff;
+use Lunar\Admin\Models\Role;
 use Lunar\Admin\Support\DataTransferObjects\Permission;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 use Lunar\Admin\Support\Facades\LunarPanel;
-use Spatie\Permission\Models\Role;
+
 
 uses(\Lunar\Tests\Admin\Feature\Filament\TestCase::class)
     ->group('resource.staff');
@@ -38,7 +39,6 @@ it('can add role', function () {
         'name' => 'new_role',
         'guard_name' => $guard,
     ]);
-
 });
 
 it('can delete role', function () {

@@ -10,7 +10,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Lunar\Admin\Filament\Resources\ActivityResource\Pages;
 use Lunar\Admin\Support\Resources\BaseResource;
-use Spatie\Activitylog\Models\Activity;
+use Lunar\Models\Activity;
 
 class ActivityResource extends BaseResource
 {
@@ -135,11 +135,11 @@ class ActivityResource extends BaseResource
                         $indicators = [];
 
                         if ($data['logged_from'] ?? null) {
-                            $indicators['logged_from'] = 'Created from '.Carbon::parse($data['logged_from'])->toFormattedDateString();
+                            $indicators['logged_from'] = 'Created from ' . Carbon::parse($data['logged_from'])->toFormattedDateString();
                         }
 
                         if ($data['logged_until'] ?? null) {
-                            $indicators['logged_until'] = 'Created until '.Carbon::parse($data['logged_until'])->toFormattedDateString();
+                            $indicators['logged_until'] = 'Created until ' . Carbon::parse($data['logged_until'])->toFormattedDateString();
                         }
 
                         return $indicators;

@@ -13,10 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Lunar\Admin\Filament\Resources\StaffResource;
+use Lunar\Admin\Models\Permission;
+use Lunar\Admin\Models\Role;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 use Lunar\Admin\Support\Facades\LunarPanel;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 /**
  * @property Collection $roles
@@ -69,7 +69,7 @@ class AccessControl extends Page
         if (is_string($result)) {
             $error = $result;
 
-            data_set($this, 'state.'.$path, false);
+            data_set($this, 'state.' . $path, false);
 
             Notification::make()
                 ->title($error)

@@ -24,7 +24,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  * @property ?\Illuminate\Support\Carbon $updated_at
  * @property ?\Illuminate\Support\Carbon $deleted_at
  */
-class Channel extends BaseModel
+class Channel extends BaseModel implements Contracts\Channel
 {
     use HasDefaultRecord;
     use HasFactory;
@@ -40,7 +40,7 @@ class Channel extends BaseModel
     /**
      * Return a new factory instance for the model.
      */
-    protected static function newFactory(): ChannelFactory
+    protected static function newFactory()
     {
         return ChannelFactory::new();
     }
@@ -61,9 +61,6 @@ class Channel extends BaseModel
         $this->attributes['handle'] = Str::slug($val);
     }
 
-    /**
-     * Get the parent channelable model.
-     */
     public function channelable(): MorphTo
     {
         return $this->morphTo();
@@ -77,7 +74,7 @@ class Channel extends BaseModel
         $prefix = config('lunar.database.table_prefix');
 
         return $this->morphedByMany(
-            Discount::class,
+            Discount::modelClass(),
             'channelable',
             "{$prefix}channelables"
         );
@@ -91,7 +88,7 @@ class Channel extends BaseModel
         $prefix = config('lunar.database.table_prefix');
 
         return $this->morphedByMany(
-            Product::class,
+            Product::modelClass(),
             'channelable',
             "{$prefix}channelables"
         );
@@ -105,7 +102,7 @@ class Channel extends BaseModel
         $prefix = config('lunar.database.table_prefix');
 
         return $this->morphedByMany(
-            Collection::class,
+            Collection::modelClass(),
             'channelable',
             "{$prefix}channelables"
         );

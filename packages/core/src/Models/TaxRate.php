@@ -9,6 +9,7 @@ use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\TaxRateFactory;
 use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
+use Lunar\Facades\DB;
 
 /**
  * @property int $id
@@ -18,7 +19,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
  */
-class TaxRate extends BaseModel
+class TaxRate extends BaseModel implements Contracts\TaxRate
 {
     use HasFactory;
     use HasMacros;
@@ -32,9 +33,18 @@ class TaxRate extends BaseModel
     /**
      * Return a new factory instance for the model.
      */
-    protected static function newFactory(): TaxRateFactory
+    protected static function newFactory()
     {
         return TaxRateFactory::new();
+    }
+
+    protected static function booted(): void
+    {
+        static::deleting(function (self $taxRate) {
+            DB::beginTransaction();
+            $taxRate->taxRateAmounts()->delete();
+            DB::commit();
+        });
     }
 
     /**
@@ -50,7 +60,7 @@ class TaxRate extends BaseModel
      */
     public function taxZone(): BelongsTo
     {
-        return $this->belongsTo(TaxZone::class);
+        return $this->belongsTo(TaxZone::modelClass());
     }
 
     /**
@@ -58,6 +68,6 @@ class TaxRate extends BaseModel
      */
     public function taxRateAmounts(): HasMany
     {
-        return $this->hasMany(TaxRateAmount::class);
+        return $this->hasMany(TaxRateAmount::modelClass());
     }
 }

@@ -36,7 +36,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
  */
-class Address extends BaseModel implements Addressable
+class Address extends BaseModel implements Addressable, Contracts\Address
 {
     use HasFactory, HasMacros;
 
@@ -50,7 +50,7 @@ class Address extends BaseModel implements Addressable
     /**
      * Return a new factory instance for the model.
      */
-    protected static function newFactory(): AddressFactory
+    protected static function newFactory()
     {
         return AddressFactory::new();
     }
@@ -79,7 +79,7 @@ class Address extends BaseModel implements Addressable
      */
     public function country(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::modelClass());
     }
 
     /**

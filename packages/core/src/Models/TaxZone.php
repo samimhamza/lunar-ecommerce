@@ -5,6 +5,7 @@ namespace Lunar\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Facades\DB;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasDefaultRecord;
 use Lunar\Base\Traits\HasMacros;
@@ -21,7 +22,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
  */
-class TaxZone extends BaseModel
+class TaxZone extends BaseModel implements Contracts\TaxZone
 {
     use HasDefaultRecord;
     use HasFactory;
@@ -40,12 +41,22 @@ class TaxZone extends BaseModel
         static::created($handleDefaultFunction);
 
         static::updated($handleDefaultFunction);
+
+        static::deleting(function (self $taxZone) {
+            DB::beginTransaction();
+            $taxZone->countries()->delete();
+            $taxZone->states()->delete();
+            $taxZone->postcodes()->delete();
+            $taxZone->customerGroups()->delete();
+            $taxZone->taxRates()->delete();
+            DB::commit();
+        });
     }
 
     /**
      * Return a new factory instance for the model.
      */
-    protected static function newFactory(): TaxZoneFactory
+    protected static function newFactory()
     {
         return TaxZoneFactory::new();
     }
@@ -73,7 +84,7 @@ class TaxZone extends BaseModel
      */
     public function countries(): HasMany
     {
-        return $this->hasMany(TaxZoneCountry::class);
+        return $this->hasMany(TaxZoneCountry::modelClass());
     }
 
     /**
@@ -81,7 +92,7 @@ class TaxZone extends BaseModel
      */
     public function states(): HasMany
     {
-        return $this->hasMany(TaxZoneState::class);
+        return $this->hasMany(TaxZoneState::modelClass());
     }
 
     /**
@@ -89,7 +100,7 @@ class TaxZone extends BaseModel
      */
     public function postcodes(): HasMany
     {
-        return $this->hasMany(TaxZonePostcode::class);
+        return $this->hasMany(TaxZonePostcode::modelClass());
     }
 
     /**
@@ -97,7 +108,7 @@ class TaxZone extends BaseModel
      */
     public function customerGroups(): HasMany
     {
-        return $this->hasMany(TaxZoneCustomerGroup::class);
+        return $this->hasMany(TaxZoneCustomerGroup::modelClass());
     }
 
     /**
@@ -105,7 +116,7 @@ class TaxZone extends BaseModel
      */
     public function taxRates(): HasMany
     {
-        return $this->hasMany(TaxRate::class);
+        return $this->hasMany(TaxRate::modelClass());
     }
 
     /**
@@ -113,6 +124,6 @@ class TaxZone extends BaseModel
      */
     public function taxAmounts(): HasManyThrough
     {
-        return $this->hasManyThrough(TaxRateAmount::class, TaxRate::class);
+        return $this->hasManyThrough(TaxRateAmount::modelClass(), TaxRate::modelClass());
     }
 }

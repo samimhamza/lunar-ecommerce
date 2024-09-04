@@ -13,7 +13,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
  * @property ?\Illuminate\Support\Carbon $created_at
  * @property ?\Illuminate\Support\Carbon $updated_at
  */
-class Asset extends BaseModel implements HasMedia
+class Asset extends BaseModel implements Contracts\Asset, HasMedia
 {
     use TraitsHasMedia;
 

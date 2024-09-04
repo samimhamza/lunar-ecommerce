@@ -27,7 +27,7 @@ class Staff extends Authenticatable implements FilamentUser, HasName
     /**
      * Return a new factory instance for the model.
      */
-    protected static function newFactory(): StaffFactory
+    protected static function newFactory()
     {
         return StaffFactory::new();
     }

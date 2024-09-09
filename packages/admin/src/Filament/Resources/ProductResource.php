@@ -104,7 +104,7 @@ class ProductResource extends BaseResource
                     ->content(
                         __('lunarpanel::product.status.unpublished.content')
                     )->type('info')->hidden(
-                        fn (Model $record) => $record?->status == 'published'
+                        fn(Model $record) => $record?->status == 'published'
                     ),
                 Shout::make('product-customer-groups')
                     ->content(
@@ -168,7 +168,7 @@ class ProductResource extends BaseResource
         return Forms\Components\TextInput::make('base_price')->numeric()->prefix(
             $currency->code
         )->rules([
-            'min:'.(1 / $currency->factor),
+            'min:' . (1 / $currency->factor),
             "decimal:0,{$currency->decimal_places}",
         ])->required();
     }
@@ -254,10 +254,10 @@ class ProductResource extends BaseResource
                 ->label(__('lunarpanel::product.table.status.label'))
                 ->badge()
                 ->getStateUsing(
-                    fn (Model $record) => $record->deleted_at ? 'deleted' : $record->status
+                    fn(Model $record) => $record->deleted_at ? 'deleted' : $record->status
                 )
-                ->formatStateUsing(fn ($state) => __('lunarpanel::product.table.status.states.'.$state))
-                ->color(fn (string $state): string => match ($state) {
+                ->formatStateUsing(fn($state) => __('lunarpanel::product.table.status.states.' . $state))
+                ->color(fn(string $state): string => match ($state) {
                     'draft' => 'warning',
                     'published' => 'success',
                     'deleted' => 'danger',
@@ -318,7 +318,7 @@ class ProductResource extends BaseResource
                 }
 
                 return $record->variants
-                    ->map(fn ($variant) => $variant->sku)
+                    ->map(fn($variant) => $variant->sku)
                     ->implode(', ');
             })
             ->listWithLineBreaks()
@@ -375,7 +375,7 @@ class ProductResource extends BaseResource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])->where('seller_id', null);
     }
 
     public static function getGlobalSearchEloquentQuery(): Builder

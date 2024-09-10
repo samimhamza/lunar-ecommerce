@@ -11,7 +11,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
-          ref: ${{ github.head_ref }}
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -26,5 +25,6 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: >
-            chore: fix code style
+          commit_message: "chore: fix code style"
+          commit_user_name: GitHub Actions
+          commit_user_email: actions@github.com

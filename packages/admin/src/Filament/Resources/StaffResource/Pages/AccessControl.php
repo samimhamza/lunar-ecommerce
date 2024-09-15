@@ -17,6 +17,8 @@ use Lunar\Admin\Models\Role;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 use Lunar\Admin\Support\Facades\LunarPanel;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Validation\Rules\Unique;
+
 
 /**
  * @property Collection $roles
@@ -153,8 +155,13 @@ class AccessControl extends Page
     public function getRolesProperty(): Collection
     {
         $admin = LunarAccessControl::getAdmin();
+        $tenantId = auth()->guard()->user()->tenant_id;
+        $includedRoles = Role::where('tenant_id', $tenantId)->pluck('name')->toArray();
 
-        return LunarAccessControl::getRoles()->reject(fn($role) => $admin->contains($role->handle));
+        return LunarAccessControl::getRoles()
+            ->unique('handle')
+            ->whereIn('handle', $includedRoles)
+            ->reject(fn($role) => $admin->contains($role->handle));
     }
 
     public function getPermissionsProperty(): Collection
@@ -173,17 +180,20 @@ class AccessControl extends Page
             Action::make('add_role')
                 ->label('lunarpanel::staff.action.add-role.label')
                 ->translateLabel()
-                ->form([
-                    TextInput::make('name')
-                        ->label('lunarpanel::staff.form.role.label')
-                        ->translateLabel()
-                        ->unique(table: Role::class)
-                        ->required(),
-                ])
-                ->action(fn($data) => $this->syncRolePermissions(Role::create([
-                    'name' => $data['name'],
-                    'guard_name' => LunarPanel::getPanel()->getAuthGuard(),
-                ])))
+                ->form([TextInput::make('name')->label('lunarpanel::staff.form.role.label')
+                    ->translateLabel()
+                    ->unique(table: Role::class, modifyRuleUsing: function (Unique $rule) {
+                        return $rule->where('tenant_id', auth()->guard()->user()->tenant_id);
+                    })
+                    ->required()])
+                ->action(
+                    fn($data) => $this->syncRolePermissions(
+                        Role::create([
+                            'name' => $data['name'],
+                            'guard_name' => LunarPanel::getPanel()->getAuthGuard(),
+                        ]),
+                    ),
+                )
                 ->modalWidth('md'),
         ];
     }

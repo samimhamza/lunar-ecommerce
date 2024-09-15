@@ -3,11 +3,10 @@
 namespace Lunar\Admin\Database\State;
 
 use Illuminate\Support\Facades\Schema;
-use Lunar\Admin\Models\Permission;
 use Lunar\Admin\Models\Role;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 use Lunar\Admin\Support\Facades\LunarPanel;
-
+use Spatie\Permission\Models\Permission;
 
 class EnsureBaseRolesAndPermissions
 {

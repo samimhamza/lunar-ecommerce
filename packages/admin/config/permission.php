@@ -1,6 +1,5 @@
 <?php
 
-use Lunar\Admin\Models\Permission;
 use Lunar\Admin\Models\Role;
 
 return [
@@ -16,8 +15,7 @@ return [
          * `Spatie\Permission\Contracts\Permission` contract.
          */
 
-        'permission' => Permission::class,
-        // Spatie\Permission\Models\Permission::class,
+        'permission' => Spatie\Permission\Models\Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which

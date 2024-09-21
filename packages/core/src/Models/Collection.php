@@ -36,6 +36,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class Collection extends BaseModel implements Contracts\Collection, SpatieHasMedia
 {
+    use BelongsToTenant;
     use HasChannels,
         HasCustomerGroups,
         HasFactory,
@@ -45,10 +46,8 @@ class Collection extends BaseModel implements Contracts\Collection, SpatieHasMed
         HasUrls,
         NodeTrait,
         Searchable {
-        NodeTrait::usesSoftDelete insteadof Searchable;
-    }
-    use BelongsToTenant;
-
+            NodeTrait::usesSoftDelete insteadof Searchable;
+        }
 
     /**
      * Define which attributes should be cast.

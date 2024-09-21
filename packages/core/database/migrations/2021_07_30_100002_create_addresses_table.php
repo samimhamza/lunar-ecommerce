@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'addresses', function (Blueprint $table) {
+        Schema::create($this->prefix.'addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->nullable()->constrained($this->prefix . 'customers');
-            $table->foreignId('country_id')->nullable()->constrained($this->prefix . 'countries');
+            $table->foreignId('customer_id')->nullable()->constrained($this->prefix.'customers');
+            $table->foreignId('country_id')->nullable()->constrained($this->prefix.'countries');
             $table->string('title')->nullable();
             $table->string('first_name');
             $table->string('last_name');
@@ -34,6 +34,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'addresses');
+        Schema::dropIfExists($this->prefix.'addresses');
     }
 };

@@ -14,15 +14,14 @@ use Lunar\Base\Traits\HasModelExtending;
 use Spatie\Permission\Traits\HasRoles;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
-
 class Staff extends Authenticatable implements FilamentUser, HasName
 {
+    use BelongsToTenant;
     use HasFactory;
+    use HasModelExtending;
     use HasRoles;
     use Notifiable;
     use SoftDeletes;
-    use HasModelExtending;
-    use BelongsToTenant;
 
     /**
      * Return a new factory instance for the model.
@@ -81,7 +80,7 @@ class Staff extends Authenticatable implements FilamentUser, HasName
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('lunar.database.table_prefix') . $this->getTable());
+        $this->setTable(config('lunar.database.table_prefix').$this->getTable());
 
         if ($connection = config('lunar.database.connection')) {
             $this->setConnection($connection);
@@ -126,7 +125,7 @@ class Staff extends Authenticatable implements FilamentUser, HasName
      */
     public function getFullNameAttribute(): string
     {
-        return $this->firstname . ' ' . $this->lastname;
+        return $this->firstname.' '.$this->lastname;
     }
 
     public function canAccessPanel(Panel $panel): bool

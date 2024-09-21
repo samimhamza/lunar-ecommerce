@@ -24,11 +24,10 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class TaxZone extends BaseModel implements Contracts\TaxZone
 {
+    use BelongsToTenant;
     use HasDefaultRecord;
     use HasFactory;
     use HasMacros;
-    use BelongsToTenant;
-
 
     protected static function booted(): void
     {

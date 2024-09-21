@@ -18,10 +18,9 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class CollectionGroup extends BaseModel implements Contracts\CollectionGroup
 {
+    use BelongsToTenant;
     use HasFactory;
     use HasMacros;
-    use BelongsToTenant;
-
 
     protected $guarded = [];
 

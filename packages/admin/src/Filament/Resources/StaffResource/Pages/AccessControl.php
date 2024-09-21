@@ -12,13 +12,12 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\Rules\Unique;
 use Lunar\Admin\Filament\Resources\StaffResource;
 use Lunar\Admin\Models\Role;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 use Lunar\Admin\Support\Facades\LunarPanel;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Validation\Rules\Unique;
-
 
 /**
  * @property Collection $roles
@@ -71,7 +70,7 @@ class AccessControl extends Page
         if (is_string($result)) {
             $error = $result;
 
-            data_set($this, 'state.' . $path, false);
+            data_set($this, 'state.'.$path, false);
 
             Notification::make()
                 ->title($error)
@@ -92,7 +91,7 @@ class AccessControl extends Page
             } else {
                 $role->revokePermissionTo($permission);
 
-                $grouped = $this->groupedPermissions->first(fn($gp) => $gp->handle == $permission->name);
+                $grouped = $this->groupedPermissions->first(fn ($gp) => $gp->handle == $permission->name);
 
                 if (filled($grouped)) {
                     $role->revokePermissionTo($grouped->children->pluck('handle')->toArray());
@@ -121,8 +120,8 @@ class AccessControl extends Page
         }
 
         if (blank($error)) {
-            $registeredRole = $this->roles->first(fn($r) => $roleHandle == $r->handle);
-            $registeredPermission = $this->permissions->first(fn($p) => $permissionHandle == $p->handle);
+            $registeredRole = $this->roles->first(fn ($r) => $roleHandle == $r->handle);
+            $registeredPermission = $this->permissions->first(fn ($p) => $permissionHandle == $p->handle);
 
             try {
                 $role = Role::findByName($roleHandle, LunarPanel::getPanel()->getAuthGuard());
@@ -161,7 +160,7 @@ class AccessControl extends Page
         return LunarAccessControl::getRoles()
             ->unique('handle')
             ->whereIn('handle', $includedRoles)
-            ->reject(fn($role) => $admin->contains($role->handle));
+            ->reject(fn ($role) => $admin->contains($role->handle));
     }
 
     public function getPermissionsProperty(): Collection
@@ -187,7 +186,7 @@ class AccessControl extends Page
                     })
                     ->required()])
                 ->action(
-                    fn($data) => $this->syncRolePermissions(
+                    fn ($data) => $this->syncRolePermissions(
                         Role::create([
                             'name' => $data['name'],
                             'guard_name' => LunarPanel::getPanel()->getAuthGuard(),
@@ -211,7 +210,7 @@ class AccessControl extends Page
                 $arguments = Arr::last($livewire->mountedActionsArguments);
 
                 if ($handle = $arguments['handle'] ?? null) {
-                    $role = LunarAccessControl::getRoles()->first(fn($r) => $r->handle == $handle);
+                    $role = LunarAccessControl::getRoles()->first(fn ($r) => $r->handle == $handle);
 
                     return __('lunarpanel::staff.action.delete-role.heading', ['role' => $role->transLabel]);
                 }

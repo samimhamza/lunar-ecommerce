@@ -23,9 +23,9 @@ use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
  */
 class Url extends BaseModel implements Contracts\Url
 {
+    use BelongsToPrimaryModel;
     use HasFactory;
     use HasMacros;
-    use BelongsToPrimaryModel;
 
     public function getRelationshipToPrimaryModel(): string
     {

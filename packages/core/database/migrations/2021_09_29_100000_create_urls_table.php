@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'urls', function (Blueprint $table) {
+        Schema::create($this->prefix.'urls', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('language_id')->constrained($this->prefix . 'languages');
+            $table->foreignId('language_id')->constrained($this->prefix.'languages');
             $table->morphs('element');
             $table->string('slug')->index();
             $table->boolean('default')->default(false)->index();
@@ -20,6 +20,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'urls');
+        Schema::dropIfExists($this->prefix.'urls');
     }
 };

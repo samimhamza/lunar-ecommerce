@@ -3,10 +3,10 @@
 namespace Lunar\Admin\Models;
 
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
-use Spatie\Permission\Models\Role as ModelsRole;
-use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 use Spatie\Permission\Guard;
+use Spatie\Permission\Models\Role as ModelsRole;
 use Spatie\Permission\PermissionRegistrar;
+use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
 class Role extends ModelsRole
 {

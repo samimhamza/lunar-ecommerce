@@ -22,11 +22,10 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class AttributeGroup extends BaseModel implements Contracts\AttributeGroup
 {
+    use BelongsToTenant;
     use HasFactory;
     use HasMacros;
     use HasTranslations;
-    use BelongsToTenant;
-
 
     /**
      * Return a new factory instance for the model.

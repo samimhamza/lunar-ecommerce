@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'orders', function (Blueprint $table) {
+        Schema::create($this->prefix.'orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->userForeignKey(nullable: true);
-            $table->foreignId('channel_id')->constrained($this->prefix . 'channels');
+            $table->foreignId('channel_id')->constrained($this->prefix.'channels');
             $table->string('status')->index();
             $table->string('reference')->nullable()->unique();
             $table->string('customer_reference')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'orders');
+        Schema::dropIfExists($this->prefix.'orders');
     }
 };

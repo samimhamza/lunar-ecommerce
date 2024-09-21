@@ -26,12 +26,12 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class Channel extends BaseModel implements Contracts\Channel
 {
+    use BelongsToTenant;
     use HasDefaultRecord;
     use HasFactory;
     use HasMacros;
     use LogsActivity;
     use SoftDeletes;
-    use BelongsToTenant;
 
     public $casts = [
         'enabled' => 'boolean',

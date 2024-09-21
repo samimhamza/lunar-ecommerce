@@ -27,13 +27,12 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class ProductOption extends BaseModel implements Contracts\ProductOption, SpatieHasMedia
 {
+    use BelongsToTenant;
     use HasFactory;
     use HasMacros;
     use HasMedia;
     use HasTranslations;
     use Searchable;
-    use BelongsToTenant;
-
 
     /**
      * Define which attributes should be cast.

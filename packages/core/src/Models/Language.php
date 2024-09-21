@@ -20,10 +20,10 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class Language extends BaseModel implements Contracts\Language
 {
+    use BelongsToTenant;
     use HasDefaultRecord;
     use HasFactory;
     use HasMacros;
-    use BelongsToTenant;
 
     /**
      * Return a new factory instance for the model.

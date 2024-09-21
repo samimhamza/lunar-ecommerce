@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'collections', function (Blueprint $table) {
+        Schema::create($this->prefix.'collections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('collection_group_id')->constrained($this->prefix . 'collection_groups');
+            $table->foreignId('collection_group_id')->constrained($this->prefix.'collection_groups');
             $table->nestedSet();
             $table->string('type')->default('static')->index();
             $table->json('attribute_data');
@@ -23,6 +23,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'collections');
+        Schema::dropIfExists($this->prefix.'collections');
     }
 };

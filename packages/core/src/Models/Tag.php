@@ -17,10 +17,9 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class Tag extends BaseModel implements Contracts\Tag
 {
+    use BelongsToTenant;
     use HasFactory;
     use HasMacros;
-    use BelongsToTenant;
-
 
     /**
      * Return a new factory instance for the model.

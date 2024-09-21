@@ -35,18 +35,17 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class Attribute extends BaseModel implements Contracts\Attribute
 {
+    use BelongsToTenant;
     use HasFactory;
     use HasMacros;
     use HasTranslations;
-    use BelongsToTenant;
-
 
     protected static function booted(): void
     {
         static::deleting(function (self $attribute) {
             DB::beginTransaction();
             DB::table(
-                config('lunar.database.table_prefix') . 'attributables'
+                config('lunar.database.table_prefix').'attributables'
             )->where('attribute_id', '=', $attribute->id)->delete();
             DB::commit();
         });

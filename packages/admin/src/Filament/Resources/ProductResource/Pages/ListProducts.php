@@ -26,8 +26,8 @@ class ListProducts extends BaseListRecords
             Actions\CreateAction::make()->createAnother(false)->form(
                 static::createActionFormInputs()
             )->using(
-                fn(array $data, string $model) => static::createRecord($data, $model)
-            )->successRedirectUrl(fn(Model $record): string => route('filament.lunar.resources.products.edit', [
+                fn (array $data, string $model) => static::createRecord($data, $model)
+            )->successRedirectUrl(fn (Model $record): string => route('filament.lunar.resources.products.edit', [
                 'record' => $record,
             ])),
         ];
@@ -85,9 +85,9 @@ class ListProducts extends BaseListRecords
         return [
             'all' => Tab::make('All'),
             'published' => Tab::make('Published')
-                ->modifyQueryUsing(fn(Builder $query) => $query->where('status', 'published')),
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'published')),
             'draft' => Tab::make('Draft')
-                ->modifyQueryUsing(fn(Builder $query) => $query->where('status', 'draft'))
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'draft'))
                 ->badge(Product::query()->where('status', 'draft')->count()),
         ];
     }

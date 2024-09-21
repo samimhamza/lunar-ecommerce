@@ -19,10 +19,10 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class ProductType extends BaseModel implements Contracts\ProductType
 {
+    use BelongsToTenant;
     use HasAttributes;
     use HasFactory;
     use HasMacros;
-    use BelongsToTenant;
 
     /**
      * Return a new factory instance for the model.

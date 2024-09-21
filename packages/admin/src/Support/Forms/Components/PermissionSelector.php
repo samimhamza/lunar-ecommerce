@@ -35,7 +35,7 @@ class PermissionSelector extends Field
         });
 
         $this->saveRelationshipsUsing(static function (PermissionSelector $component, ?array $state) {
-            if (!is_array($state)) {
+            if (! is_array($state)) {
                 $state = [];
             }
 
@@ -121,7 +121,7 @@ class PermissionSelector extends Field
             }
         }
 
-        if (!$isUpdated) {
+        if (! $isUpdated) {
             foreach ($groupedPermissions as $permission) {
                 if (isset($rolesPermissions[$permission->handle])) {
                     $state[$permission->handle] = null;
@@ -200,7 +200,7 @@ class PermissionSelector extends Field
 
         $traits = trait_uses_recursive($record);
 
-        if (!in_array(\Spatie\Permission\Traits\HasRoles::class, $traits)) {
+        if (! in_array(\Spatie\Permission\Traits\HasRoles::class, $traits)) {
             throw new Exception('Not implemented \Spatie\Permission\Traits\HasRoles');
         }
 

@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'transactions', function (Blueprint $table) {
+        Schema::create($this->prefix.'transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('order_id')->constrained($this->prefix . 'orders');
+            $table->foreignId('order_id')->constrained($this->prefix.'orders');
             $table->boolean('success')->index();
             $table->boolean('refund')->default(false)->index();
             $table->string('driver');
@@ -27,6 +27,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'transactions');
+        Schema::dropIfExists($this->prefix.'transactions');
     }
 };

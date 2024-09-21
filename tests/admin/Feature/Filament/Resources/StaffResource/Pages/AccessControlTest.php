@@ -9,7 +9,6 @@ use Lunar\Admin\Support\DataTransferObjects\Permission;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 use Lunar\Admin\Support\Facades\LunarPanel;
 
-
 uses(\Lunar\Tests\Admin\Feature\Filament\TestCase::class)
     ->group('resource.staff');
 

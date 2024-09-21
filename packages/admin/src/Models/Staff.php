@@ -13,14 +13,13 @@ use Lunar\Admin\Database\Factories\StaffFactory;
 use Spatie\Permission\Traits\HasRoles;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
-
 class Staff extends Authenticatable implements FilamentUser, HasName
 {
+    use BelongsToTenant;
     use HasFactory;
     use HasRoles;
     use Notifiable;
     use SoftDeletes;
-    use BelongsToTenant;
 
     /**
      * Return a new factory instance for the model.

@@ -28,6 +28,7 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class Brand extends BaseModel implements Contracts\Brand, SpatieHasMedia
 {
+    use BelongsToTenant;
     use HasAttributes;
     use HasFactory;
     use HasMacros;
@@ -36,7 +37,6 @@ class Brand extends BaseModel implements Contracts\Brand, SpatieHasMedia
     use HasUrls;
     use LogsActivity;
     use Searchable;
-    use BelongsToTenant;
 
     /**
      * {@inheritDoc}

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'assets', function (Blueprint $table) {
+        Schema::create($this->prefix.'assets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -16,6 +16,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'assets');
+        Schema::dropIfExists($this->prefix.'assets');
     }
 };

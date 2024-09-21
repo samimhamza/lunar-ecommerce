@@ -11,7 +11,6 @@ use Lunar\Base\Traits\HasMacros;
 use Lunar\Database\Factories\AddressFactory;
 use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
 
-
 /**
  * @property int $id
  * @property int $customer_id
@@ -38,9 +37,8 @@ use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
  */
 class Address extends BaseModel implements Addressable, Contracts\Address
 {
-    use HasFactory, HasMacros;
-
     use BelongsToPrimaryModel;
+    use HasFactory, HasMacros;
 
     public function getRelationshipToPrimaryModel(): string
     {

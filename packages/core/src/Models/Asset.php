@@ -15,9 +15,8 @@ use Stancl\Tenancy\Database\Concerns\BelongsToPrimaryModel;
  */
 class Asset extends BaseModel implements Contracts\Asset, HasMedia
 {
-    use TraitsHasMedia;
-
     use BelongsToPrimaryModel;
+    use TraitsHasMedia;
 
     public function getRelationshipToPrimaryModel(): string
     {

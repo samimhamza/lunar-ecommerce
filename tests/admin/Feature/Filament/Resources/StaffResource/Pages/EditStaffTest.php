@@ -7,7 +7,6 @@ use Lunar\Admin\Models\Role;
 use Lunar\Admin\Models\Staff;
 use Lunar\Admin\Support\Facades\LunarAccessControl;
 
-
 uses(\Lunar\Tests\Admin\Feature\Filament\TestCase::class)
     ->group('resource.staff');
 

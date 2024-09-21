@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Permission;
 uses(\Lunar\Tests\Admin\Feature\Filament\TestCase::class)
     ->group('unit.manifest');
 
-beforeEach(fn() => $this->manifest = new Manifest);
+beforeEach(fn () => $this->manifest = new Manifest);
 
 test('manifest can get roles', function () {
     $roles = $this->manifest->getRoles();
@@ -77,13 +77,13 @@ test('manifest can get grouped permissions', function () {
         ->toBeIterable()
         ->not->toBeEmpty();
 
-    $parent = $permissions->first(fn($perm) => count($perm->children));
+    $parent = $permissions->first(fn ($perm) => count($perm->children));
 
     expect($parent->children)
         ->toBeIterable()
         ->not->toBeEmpty();
 
-    $notParent = $permissions->first(fn($perm) => !count($perm->children));
+    $notParent = $permissions->first(fn ($perm) => ! count($perm->children));
 
     expect($notParent->children)
         ->toBeIterable()
@@ -104,16 +104,16 @@ test('manifest can get refreshed grouped permissions', function () {
         ]);
     }
 
-    $permissions = $this->manifest->getGroupedPermissions()->first(fn($perm) => $perm->handle == 'group')->children->pluck('handle')->toArray();
+    $permissions = $this->manifest->getGroupedPermissions()->first(fn ($perm) => $perm->handle == 'group')->children->pluck('handle')->toArray();
 
     Permission::create([
         'name' => 'group:child_2',
         'guard_name' => $guard,
     ]);
 
-    $cachedPermissions = $this->manifest->getGroupedPermissions()->first(fn($perm) => $perm->handle == 'group')->children->pluck('handle')->toArray();
+    $cachedPermissions = $this->manifest->getGroupedPermissions()->first(fn ($perm) => $perm->handle == 'group')->children->pluck('handle')->toArray();
 
-    $refreshedPermissions = $this->manifest->getGroupedPermissions(refresh: true)->first(fn($perm) => $perm->handle == 'group')->children->pluck('handle')->toArray();
+    $refreshedPermissions = $this->manifest->getGroupedPermissions(refresh: true)->first(fn ($perm) => $perm->handle == 'group')->children->pluck('handle')->toArray();
 
     expect($permissions)
         ->toEqualCanonicalizing($cachedPermissions);

@@ -19,11 +19,10 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class TaxClass extends BaseModel implements Contracts\TaxClass
 {
+    use BelongsToTenant;
     use HasDefaultRecord;
     use HasFactory;
     use HasMacros;
-    use BelongsToTenant;
-
 
     public static function booted()
     {

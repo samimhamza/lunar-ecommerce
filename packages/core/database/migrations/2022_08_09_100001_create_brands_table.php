@@ -8,16 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'brands', function (Blueprint $table) {
+        Schema::create($this->prefix . 'brands', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
-            $table->foreignUuid('tenant_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('tenant_id')->constrained('companies')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'brands');
+        Schema::dropIfExists($this->prefix . 'brands');
     }
 };

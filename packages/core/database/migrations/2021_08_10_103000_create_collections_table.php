@@ -8,21 +8,21 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'collections', function (Blueprint $table) {
+        Schema::create($this->prefix . 'collections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('collection_group_id')->constrained($this->prefix.'collection_groups');
+            $table->foreignId('collection_group_id')->constrained($this->prefix . 'collection_groups');
             $table->nestedSet();
             $table->string('type')->default('static')->index();
             $table->json('attribute_data');
             $table->string('sort')->default('custom')->index();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreignUuid('tenant_id')->constrained('companies')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('tenant_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'collections');
+        Schema::dropIfExists($this->prefix . 'collections');
     }
 };

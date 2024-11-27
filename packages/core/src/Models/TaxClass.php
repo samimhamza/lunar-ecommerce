@@ -28,17 +28,19 @@ class TaxClass extends BaseModel implements Contracts\TaxClass
     {
         static::updated(function ($taxClass) {
             if ($taxClass->default) {
-                TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)->update([
-                    'default' => false,
-                ]);
+                TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)
+                    ->where('tenant_id', $taxClass->tenant_id)->update([
+                        'default' => false,
+                    ]);
             }
         });
 
         static::created(function ($taxClass) {
             if ($taxClass->default) {
-                TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)->update([
-                    'default' => false,
-                ]);
+                TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)
+                    ->where('tenant_id', $taxClass->tenant_id)->update([
+                        'default' => false,
+                    ]);
             }
         });
     }

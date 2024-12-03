@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'channels', function (Blueprint $table) {
+        Schema::create($this->prefix . 'channels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('handle'); //->unique();
@@ -17,12 +17,13 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unique(['handle', 'tenant_id']);
+            $table->foreignUuid('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['handle', 'tenant_id', 'seller_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'channels');
+        Schema::dropIfExists($this->prefix . 'channels');
     }
 };

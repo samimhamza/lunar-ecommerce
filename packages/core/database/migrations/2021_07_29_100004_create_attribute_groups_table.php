@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'attribute_groups', function (Blueprint $table) {
+        Schema::create($this->prefix . 'attribute_groups', function (Blueprint $table) {
             $table->id();
             $table->string('attributable_type')->index();
             $table->json('name');
@@ -16,12 +16,13 @@ return new class extends Migration
             $table->integer('position')->index();
             $table->timestamps();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unique(['handle', 'tenant_id']);
+            $table->foreignUuid('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['handle', 'tenant_id', 'seller_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'attribute_groups');
+        Schema::dropIfExists($this->prefix . 'attribute_groups');
     }
 };

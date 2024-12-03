@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'staff', function (Blueprint $table) {
+        Schema::create($this->prefix . 'staff', function (Blueprint $table) {
             $table->id();
             $table->boolean('admin')->default(false)->index();
             $table->string('firstname')->index();
@@ -19,13 +19,14 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreignUuid('tenant_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unique(['email', 'tenant_id']);
+            $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['email', 'tenant_id', 'seller_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'staff');
+        Schema::dropIfExists($this->prefix . 'staff');
     }
 };

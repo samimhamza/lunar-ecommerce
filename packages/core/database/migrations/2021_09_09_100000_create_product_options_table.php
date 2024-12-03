@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'product_options', function (Blueprint $table) {
+        Schema::create($this->prefix.'product_options', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->json('name');
             $table->timestamps();
@@ -19,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'product_options');
+        Schema::dropIfExists($this->prefix.'product_options');
     }
 };

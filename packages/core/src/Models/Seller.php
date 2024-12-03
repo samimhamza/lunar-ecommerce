@@ -2,13 +2,12 @@
 
 namespace Lunar\Models;
 
-use Lunar\Enums\SellerStatus;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Lunar\Enums\SellerStatus;
 
 class Seller extends Authenticatable implements HasName
 {
@@ -44,7 +43,6 @@ class Seller extends Authenticatable implements HasName
             'status' => SellerStatus::class,
         ];
     }
-
 
     public function getFilamentName(): string
     {

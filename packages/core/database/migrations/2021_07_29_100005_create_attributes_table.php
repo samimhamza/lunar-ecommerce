@@ -8,10 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'attributes', function (Blueprint $table) {
+        Schema::create($this->prefix.'attributes', function (Blueprint $table) {
             $table->id();
             $table->string('attribute_type')->index();
-            $table->foreignId('attribute_group_id')->constrained($this->prefix . 'attribute_groups');
+            $table->foreignId('attribute_group_id')->constrained($this->prefix.'attribute_groups');
             $table->integer('position')->index();
             $table->json('name');
             $table->string('handle');
@@ -29,6 +29,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'attributes');
+        Schema::dropIfExists($this->prefix.'attributes');
     }
 };

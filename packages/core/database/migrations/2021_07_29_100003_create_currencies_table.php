@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix . 'currencies', function (Blueprint $table) {
+        Schema::create($this->prefix.'currencies', function (Blueprint $table) {
             $table->id();
             $table->string('code'); // ->unique();
             $table->string('name');
@@ -28,6 +28,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'currencies');
+        Schema::dropIfExists($this->prefix.'currencies');
     }
 };

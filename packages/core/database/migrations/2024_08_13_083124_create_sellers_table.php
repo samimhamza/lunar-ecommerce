@@ -1,9 +1,9 @@
 <?php
 
-use  Lunar\Models\Seller;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Lunar\Models\Seller;
 
 return new class extends Migration
 {

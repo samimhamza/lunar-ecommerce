@@ -73,7 +73,7 @@ class Product extends BaseModel implements Contracts\Product, SpatieHasMedia
         'product_type_id',
         'status',
         'brand_id',
-        'seller_id'
+        'seller_id',
     ];
 
     /**
@@ -91,7 +91,7 @@ class Product extends BaseModel implements Contracts\Product, SpatieHasMedia
     protected function recordTitle(): Attribute
     {
         return Attribute::make(
-            get: fn(mixed $value) => $this->translateAttribute('name'),
+            get: fn (mixed $value) => $this->translateAttribute('name'),
         );
     }
 
@@ -119,7 +119,7 @@ class Product extends BaseModel implements Contracts\Product, SpatieHasMedia
     {
         return $this->belongsToMany(
             \Lunar\Models\Collection::modelClass(),
-            config('lunar.database.table_prefix') . 'collection_product'
+            config('lunar.database.table_prefix').'collection_product'
         )->withPivot(['position'])->withTimestamps();
     }
 

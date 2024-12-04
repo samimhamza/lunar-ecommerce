@@ -18,7 +18,6 @@ use Lunar\Base\Traits\HasTranslations;
 use Lunar\Base\Traits\HasUrls;
 use Lunar\Base\Traits\Searchable;
 use Lunar\Database\Factories\CollectionFactory;
-use Lunar\Models\Seller;
 use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 

@@ -18,6 +18,7 @@ use Lunar\Base\Traits\HasTranslations;
 use Lunar\Base\Traits\HasUrls;
 use Lunar\Base\Traits\Searchable;
 use Lunar\Database\Factories\CollectionFactory;
+use Lunar\Models\Seller;
 use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 
@@ -149,5 +150,13 @@ class Collection extends BaseModel implements Contracts\Collection, SpatieHasMed
     public function newEloquentBuilder($query): QueryBuilder
     {
         return new QueryBuilder($query);
+    }
+
+    /**
+     * Get the seller that owns the collection.
+     */
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
     }
 }

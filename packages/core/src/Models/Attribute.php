@@ -92,4 +92,9 @@ class Attribute extends BaseModel implements Contracts\Attribute
     {
         return $query->whereAttributeType($type)->whereSystem(true);
     }
+
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
+    }
 }

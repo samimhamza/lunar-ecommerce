@@ -201,4 +201,9 @@ class Product extends BaseModel implements Contracts\Product, SpatieHasMedia
             "{$prefix}product_product_option"
         )->withPivot(['position'])->orderByPivot('position');
     }
+
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
+    }
 }

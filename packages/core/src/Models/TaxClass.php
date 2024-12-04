@@ -32,7 +32,7 @@ class TaxClass extends BaseModel implements Contracts\TaxClass
                 TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)
                     ->where(function ($query) use ($taxClass) {
                         $query->where('tenant_id', $taxClass->tenant_id)
-                              ->orWhere('seller_id', $taxClass->seller_id);
+                            ->orWhere('seller_id', $taxClass->seller_id);
                     })
                     ->update([
                         'default' => false,
@@ -45,7 +45,7 @@ class TaxClass extends BaseModel implements Contracts\TaxClass
                 TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)
                     ->where(function ($query) use ($taxClass) {
                         $query->where('tenant_id', $taxClass->tenant_id)
-                              ->orWhere('seller_id', $taxClass->seller_id);
+                            ->orWhere('seller_id', $taxClass->seller_id);
                     })
                     ->update([
                         'default' => false,

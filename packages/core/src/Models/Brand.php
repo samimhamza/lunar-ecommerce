@@ -17,7 +17,6 @@ use Lunar\Base\Traits\LogsActivity;
 use Lunar\Base\Traits\Searchable;
 use Lunar\Database\Factories\BrandFactory;
 use Lunar\Facades\DB;
-use Lunar\Models\Seller;
 use Spatie\MediaLibrary\HasMedia as SpatieHasMedia;
 use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
 

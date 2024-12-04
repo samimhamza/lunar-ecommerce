@@ -58,7 +58,7 @@ class CurrencyObserver
             $currencies = Currency::whereDefault(true)->where('id', '!=', $savedCurrency->id)
                 ->where(function ($query) use ($savedCurrency) {
                     $query->where('tenant_id', $savedCurrency->tenant_id)
-                          ->orWhere('seller_id', $savedCurrency->seller_id);
+                        ->orWhere('seller_id', $savedCurrency->seller_id);
                 })
                 ->get();
 

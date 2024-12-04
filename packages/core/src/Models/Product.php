@@ -73,6 +73,7 @@ class Product extends BaseModel implements Contracts\Product, SpatieHasMedia
         'product_type_id',
         'status',
         'brand_id',
+        'seller_id',
     ];
 
     /**
@@ -199,5 +200,10 @@ class Product extends BaseModel implements Contracts\Product, SpatieHasMedia
             ProductOption::modelClass(),
             "{$prefix}product_product_option"
         )->withPivot(['position'])->orderByPivot('position');
+    }
+
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
     }
 }

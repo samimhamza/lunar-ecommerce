@@ -29,7 +29,8 @@ return new class extends Migration
 
                 $table->nullableTimestamps();
                 $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-                $table->unique(['tenant_id', 'uuid']);
+                $table->foreignUuid('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->unique(['uuid', 'tenant_id', 'seller_id']);
             });
         }
     }

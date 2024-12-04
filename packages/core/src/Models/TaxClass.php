@@ -3,6 +3,7 @@
 namespace Lunar\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lunar\Base\BaseModel;
 use Lunar\Base\Traits\HasDefaultRecord;
@@ -29,7 +30,11 @@ class TaxClass extends BaseModel implements Contracts\TaxClass
         static::updated(function ($taxClass) {
             if ($taxClass->default) {
                 TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)
-                    ->where('tenant_id', $taxClass->tenant_id)->update([
+                    ->where(function ($query) use ($taxClass) {
+                        $query->where('tenant_id', $taxClass->tenant_id)
+                            ->orWhere('seller_id', $taxClass->seller_id);
+                    })
+                    ->update([
                         'default' => false,
                     ]);
             }
@@ -38,7 +43,11 @@ class TaxClass extends BaseModel implements Contracts\TaxClass
         static::created(function ($taxClass) {
             if ($taxClass->default) {
                 TaxClass::whereDefault(true)->where('id', '!=', $taxClass->id)
-                    ->where('tenant_id', $taxClass->tenant_id)->update([
+                    ->where(function ($query) use ($taxClass) {
+                        $query->where('tenant_id', $taxClass->tenant_id)
+                            ->orWhere('seller_id', $taxClass->seller_id);
+                    })
+                    ->update([
                         'default' => false,
                     ]);
             }
@@ -69,5 +78,10 @@ class TaxClass extends BaseModel implements Contracts\TaxClass
     public function productVariants(): HasMany
     {
         return $this->hasMany(ProductVariant::modelClass());
+    }
+
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
     }
 }

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unique(['handle', 'tenant_id']);
+            $table->foreignUuid('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unique(['handle', 'tenant_id', 'seller_id']);
         });
     }
 

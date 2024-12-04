@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('handle')->index();
             $table->timestamps();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

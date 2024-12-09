@@ -45,7 +45,7 @@ class Attribute extends BaseModel implements Contracts\Attribute
         static::deleting(function (self $attribute) {
             DB::beginTransaction();
             DB::table(
-                config('lunar.database.table_prefix') . 'attributables'
+                config('lunar.database.table_prefix').'attributables'
             )->where('attribute_id', '=', $attribute->id)->delete();
             DB::commit();
         });

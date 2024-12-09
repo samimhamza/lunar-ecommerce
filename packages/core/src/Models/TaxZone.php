@@ -31,9 +31,9 @@ class TaxZone extends BaseModel implements Contracts\TaxZone
 
     protected static function booted(): void
     {
-        $handleDefaultFunction = fn(TaxZone $taxZone) => TaxZone::when(
+        $handleDefaultFunction = fn (TaxZone $taxZone) => TaxZone::when(
             $taxZone->default,
-            fn($query) => $query->where('id', '!=', $taxZone->id)->update([
+            fn ($query) => $query->where('id', '!=', $taxZone->id)->update([
                 'default' => false,
             ])
         );

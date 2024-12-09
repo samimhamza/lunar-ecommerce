@@ -8,16 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'product_options', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+        Schema::create($this->prefix . 'product_options', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->json('name');
             $table->timestamps();
-            $table->foreignId('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('tenant_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'product_options');
+        Schema::dropIfExists($this->prefix . 'product_options');
     }
 };

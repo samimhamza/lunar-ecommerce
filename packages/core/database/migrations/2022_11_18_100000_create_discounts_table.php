@@ -8,32 +8,29 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create($this->prefix.'discounts', function (Blueprint $table) {
+        Schema::create($this->prefix . 'discounts', function (Blueprint $table) {
             $table->id();
-            $table->string('handle')->nullable();
             $table->string('name');
-            $table->string('coupon')->nullable();
-            $table->text('description')->nullable();
-            $table->integer('type')->index();
-            $table->integer('status')->index();
-            $table->integer('uses')->default(0);
-            $table->integer('max_uses')->nullable();
-            $table->integer('priority')->default(1);
-            $table->integer('stop')->default(0);
-            $table->decimal('reduction')->nullable();
-            $table->string('reduction_type')->nullable();
-            $table->dateTime('starts_at')->nullable();
-            $table->dateTime('ends_at')->nullable();
-            $table->foreignId('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('handle'); // ->unique();
+            $table->string('coupon')->nullable(); // ->unique();
+            $table->string('type')->index();
+            $table->dateTime('starts_at')->index();
+            $table->dateTime('ends_at')->nullable()->index();
+            $table->integer('uses')->unsigned()->default(0)->index();
+            $table->mediumInteger('max_uses')->unsigned()->nullable();
+            $table->mediumInteger('priority')->unsigned()->index()->default(1);
+            $table->boolean('stop')->default(false)->index();
+            $table->string('restriction')->index()->nullable();
+            $table->json('data')->nullable();
+            $table->timestamps();
+            $table->foreignUuid('tenant_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unique(['handle', 'tenant_id']);
             $table->unique(['coupon', 'tenant_id']);
-            $table->timestamps();
-            $table->json('data')->nullable();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix.'discounts');
+        Schema::dropIfExists($this->prefix . 'discounts');
     }
 };

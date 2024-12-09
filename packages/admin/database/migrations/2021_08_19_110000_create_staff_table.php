@@ -20,8 +20,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unique(['email', 'tenant_id', 'seller_id']);
+            $table->unique(['email', 'tenant_id']);
         });
     }
 

@@ -5,7 +5,6 @@ namespace Lunar\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Lunar\Base\BaseModel;
@@ -85,10 +84,5 @@ class ProductOption extends BaseModel implements Contracts\ProductOption, Spatie
             Product::modelClass(),
             "{$prefix}product_product_option"
         )->withPivot(['position'])->orderByPivot('position');
-    }
-
-    public function seller(): BelongsTo
-    {
-        return $this->belongsTo(Seller::class);
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
                 $table->bigIncrements('id');
 
                 $table->morphs('model');
-                $table->uuid('uuid')->nullable(); // ->unique()
+                $table->uuid('uuid')->unique();
                 $table->string('collection_name');
                 $table->string('name');
                 $table->string('file_name');
@@ -29,8 +29,7 @@ return new class extends Migration
 
                 $table->nullableTimestamps();
                 $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-                $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-                $table->unique(['uuid', 'tenant_id', 'seller_id']);
+                $table->unique(['uuid', 'tenant_id']);
             });
         }
     }

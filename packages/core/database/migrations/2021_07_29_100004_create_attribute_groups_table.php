@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('position')->index();
             $table->timestamps();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unique(['handle', 'tenant_id', 'seller_id']);
+            $table->unique(['handle', 'tenant_id']);
         });
     }
 

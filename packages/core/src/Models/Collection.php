@@ -46,8 +46,8 @@ class Collection extends BaseModel implements Contracts\Collection, SpatieHasMed
         HasUrls,
         NodeTrait,
         Searchable {
-            NodeTrait::usesSoftDelete insteadof Searchable;
-        }
+        NodeTrait::usesSoftDelete insteadof Searchable;
+    }
 
     /**
      * Define which attributes should be cast.
@@ -154,8 +154,4 @@ class Collection extends BaseModel implements Contracts\Collection, SpatieHasMed
     /**
      * Get the seller that owns the collection.
      */
-    public function seller(): BelongsTo
-    {
-        return $this->belongsTo(Seller::class);
-    }
 }

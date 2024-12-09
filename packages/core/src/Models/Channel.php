@@ -3,7 +3,6 @@
 namespace Lunar\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -107,10 +106,5 @@ class Channel extends BaseModel implements Contracts\Channel
             'channelable',
             "{$prefix}channelables"
         );
-    }
-
-    public function seller(): BelongsTo
-    {
-        return $this->belongsTo(Seller::class);
     }
 }

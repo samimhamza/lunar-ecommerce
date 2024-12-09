@@ -12,12 +12,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('zone_type')->index();
-            $table->string('price_display');
-            $table->boolean('active')->index();
-            $table->boolean('default')->index();
+            $table->string('price_display')->nullable();
+            $table->boolean('active')->default(true)->index();
+            $table->boolean('default')->default(false)->index();
             $table->timestamps();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

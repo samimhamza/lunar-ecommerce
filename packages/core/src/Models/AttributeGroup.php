@@ -57,9 +57,4 @@ class AttributeGroup extends BaseModel implements Contracts\AttributeGroup
     {
         return $this->hasMany(Attribute::modelClass())->orderBy('position');
     }
-
-    public function seller(): BelongsTo
-    {
-        return $this->belongsTo(Seller::class);
-    }
 }

@@ -9,11 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create($this->prefix.'product_options', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->json('name');
+            $table->id();
+            $table->string('name');
             $table->timestamps();
-            $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

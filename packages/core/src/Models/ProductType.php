@@ -3,7 +3,6 @@
 namespace Lunar\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Lunar\Base\BaseModel;
@@ -69,10 +68,5 @@ class ProductType extends BaseModel implements Contracts\ProductType
     public function products(): HasMany
     {
         return $this->hasMany(Product::modelClass());
-    }
-
-    public function seller(): BelongsTo
-    {
-        return $this->belongsTo(Seller::class);
     }
 }

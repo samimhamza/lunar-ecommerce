@@ -4,7 +4,6 @@ namespace Lunar\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
@@ -179,14 +178,14 @@ class Discount extends BaseModel implements Contracts\Discount
         $types = Arr::wrap($types);
 
         return $query->where(
-            fn ($subQuery) => $subQuery->whereDoesntHave('purchasables', fn ($query) => $query->when($types, fn ($query) => $query->whereIn('type', $types)))
+            fn($subQuery) => $subQuery->whereDoesntHave('purchasables', fn($query) => $query->when($types, fn($query) => $query->whereIn('type', $types)))
                 ->orWhereHas(
                     'purchasables',
-                    fn ($relation) => $relation->whereIn('purchasable_id', $productIds)
+                    fn($relation) => $relation->whereIn('purchasable_id', $productIds)
                         ->wherePurchasableType(Product::morphName())
                         ->when(
                             $types,
-                            fn ($query) => $query->whereIn('type', $types)
+                            fn($query) => $query->whereIn('type', $types)
                         )
                 )
         );
@@ -201,14 +200,14 @@ class Discount extends BaseModel implements Contracts\Discount
         $types = Arr::wrap($types);
 
         return $query->where(
-            fn ($subQuery) => $subQuery->whereDoesntHave('purchasables', fn ($query) => $query->when($types, fn ($query) => $query->whereIn('type', $types)))
+            fn($subQuery) => $subQuery->whereDoesntHave('purchasables', fn($query) => $query->when($types, fn($query) => $query->whereIn('type', $types)))
                 ->orWhereHas(
                     'purchasables',
-                    fn ($relation) => $relation->whereIn('purchasable_id', $variantIds)
+                    fn($relation) => $relation->whereIn('purchasable_id', $variantIds)
                         ->wherePurchasableType(ProductVariant::morphName())
                         ->when(
                             $types,
-                            fn ($query) => $query->whereIn('type', $types)
+                            fn($query) => $query->whereIn('type', $types)
                         )
                 )
         );
@@ -220,10 +219,5 @@ class Discount extends BaseModel implements Contracts\Discount
             $subQuery->whereRaw('uses < max_uses')
                 ->orWhereNull('max_uses');
         });
-    }
-
-    public function seller(): BelongsTo
-    {
-        return $this->belongsTo(Seller::class);
     }
 }

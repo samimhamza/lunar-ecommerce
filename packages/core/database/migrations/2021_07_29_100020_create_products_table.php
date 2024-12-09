@@ -12,12 +12,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_type_id')->constrained($this->prefix.'product_types');
             $table->string('status')->index();
+            $table->string('type')->index();
             $table->json('attribute_data');
             $table->string('brand')->nullable()->index();
             $table->timestamps();
             $table->softDeletes();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

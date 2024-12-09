@@ -12,18 +12,19 @@ return new class extends Migration
             $table->id();
             $table->string('attribute_type')->index();
             $table->foreignId('attribute_group_id')->constrained($this->prefix.'attribute_groups');
-            $table->integer('position')->index();
-            $table->json('name');
             $table->string('handle');
-            $table->string('section');
+            $table->string('position')->default(1);
+            $table->string('section')->nullable();
             $table->string('type')->index();
-            $table->boolean('required');
-            $table->string('default_value')->nullable();
+            $table->boolean('required')->default(false)->index();
+            $table->boolean('searchable')->default(true)->index();
+            $table->boolean('filterable')->default(true)->index();
+            $table->json('name');
             $table->json('configuration');
+            $table->json('system');
             $table->boolean('system');
             $table->timestamps();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

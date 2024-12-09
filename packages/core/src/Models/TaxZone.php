@@ -3,7 +3,6 @@
 namespace Lunar\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Facades\DB;
@@ -32,9 +31,9 @@ class TaxZone extends BaseModel implements Contracts\TaxZone
 
     protected static function booted(): void
     {
-        $handleDefaultFunction = fn (TaxZone $taxZone) => TaxZone::when(
+        $handleDefaultFunction = fn(TaxZone $taxZone) => TaxZone::when(
             $taxZone->default,
-            fn ($query) => $query->where('id', '!=', $taxZone->id)->update([
+            fn($query) => $query->where('id', '!=', $taxZone->id)->update([
                 'default' => false,
             ])
         );
@@ -125,10 +124,5 @@ class TaxZone extends BaseModel implements Contracts\TaxZone
     public function taxAmounts(): HasManyThrough
     {
         return $this->hasManyThrough(TaxRateAmount::modelClass(), TaxRate::modelClass());
-    }
-
-    public function seller(): BelongsTo
-    {
-        return $this->belongsTo(Seller::class);
     }
 }

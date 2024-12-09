@@ -10,15 +10,15 @@ return new class extends Migration
     {
         Schema::create($this->prefix.'collections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('collection_group_id')->constrained($this->prefix.'collection_groups');
+            $table->string('collection_group_id');
             $table->nestedSet();
             $table->string('type')->default('static')->index();
+            $table->boolean('default')->default(false)->index();
             $table->json('attribute_data');
             $table->string('sort')->default('custom')->index();
             $table->timestamps();
             $table->softDeletes();
             $table->foreignUuid('tenant_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('seller_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

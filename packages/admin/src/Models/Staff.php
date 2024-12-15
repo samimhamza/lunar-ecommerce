@@ -42,6 +42,8 @@ class Staff extends Authenticatable implements FilamentUser, HasName
         'phone',
         'password',
         'tenant_id',
+        'email_verified_at',
+        'phone_verified_at',
     ];
 
     protected $guard_name = 'staff';
@@ -63,6 +65,7 @@ class Staff extends Authenticatable implements FilamentUser, HasName
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'phone_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 

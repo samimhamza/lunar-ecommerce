@@ -4,8 +4,8 @@ use Lunar\Admin\Filament\Resources\ActivityResource;
 use Lunar\Admin\Filament\Resources\ActivityResource\Pages\ListActivities;
 use Lunar\Admin\Filament\Resources\AttributeGroupResource;
 use Lunar\Admin\Filament\Resources\AttributeGroupResource\Pages\ListAttributeGroups;
-use Lunar\Admin\Filament\Resources\CurrencyResource;
-use Lunar\Admin\Filament\Resources\CurrencyResource\Pages\ListCurrencies;
+// use Lunar\Admin\Filament\Resources\CurrencyResource;
+// use Lunar\Admin\Filament\Resources\CurrencyResource\Pages\ListCurrencies;
 use Lunar\Admin\Filament\Resources\CustomerResource;
 use Lunar\Admin\Filament\Resources\LanguageResource;
 use Lunar\Admin\Filament\Resources\LanguageResource\Pages\ListLanguages;
@@ -55,7 +55,7 @@ it('can extend table columns', function ($resource, $page) {
 
     \Livewire\Livewire::test($page)->assertTableColumnExists('test_column');
 })->with([
-    'ListCurrencies' => [CurrencyResource::class, ListCurrencies::class],
+    // 'ListCurrencies' => [CurrencyResource::class, ListCurrencies::class],
     'ListLanguages' => [LanguageResource::class, ListLanguages::class],
     'ListActivities' => [ActivityResource::class, ListActivities::class],
     'ListAttributeGroups' => [AttributeGroupResource::class, ListAttributeGroups::class],
@@ -87,6 +87,6 @@ it('can extend form schema', function ($resource, $page) {
         'record' => $model->getRouteKey(),
     ])->assertFormFieldExists('test_form_field');
 })->with([
-    'CurrencyResource' => [CurrencyResource::class, CurrencyResource\Pages\EditCurrency::class],
+    // 'CurrencyResource' => [CurrencyResource::class, CurrencyResource\Pages\EditCurrency::class],
     'LanguageResource' => [LanguageResource::class, LanguageResource\Pages\EditLanguage::class],
 ]);

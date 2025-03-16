@@ -65,7 +65,7 @@ use Lunar\Panel\Filament\Resources\BrandResource;
 use Lunar\Panel\Filament\Resources\ChannelResource;
 use Lunar\Panel\Filament\Resources\CollectionGroupResource;
 use Lunar\Panel\Filament\Resources\CollectionResource;
-// use Lunar\Panel\Filament\Resources\CurrencyResource;
+use Lunar\Panel\Filament\Resources\CurrencyResource;
 use Lunar\Panel\Filament\Resources\CustomerGroupResource;
 use Lunar\Panel\Filament\Resources\CustomerResource;
 use Lunar\Panel\Filament\Resources\DiscountResource;

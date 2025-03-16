@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create($this->prefix.'currencies', function (Blueprint $table) {
             $table->id();
-            $table->string('code'); // ->unique();
+            $table->string('code')->unique();
             $table->string('name');
             $table->decimal('exchange_rate', 10, 4);
             $table->string('format');
@@ -20,8 +20,6 @@ return new class extends Migration
             $table->boolean('enabled')->default(false)->index();
             $table->boolean('default')->default(false)->index();
             $table->timestamps();
-            $table->foreignUuid('tenant_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unique(['code', 'tenant_id']);
         });
     }
 

@@ -1,10 +1,9 @@
-
 # Overview
 
 The Lunar Panel is highly customizable, you can add and change the behaviour of existing Filament resources. This might be useful if you wish to add a button for
-additional custom functionality. 
+additional custom functionality.
 
-##  Extending Pages
+## Extending Pages
 
 To extend a page you need to create and register an extension.
 
@@ -38,7 +37,8 @@ LunarPanel::extensions([
 
 ```
 
-##  Extending Resources
+## Extending Resources
+
 Much like extending pages, to extend a resource you need to create and register an extension.
 
 For example, the code below will register a custom extension called `MyProductResourceExtension` for the `ProductResource` Filament resource.
@@ -65,7 +65,7 @@ use Lunar\Panel\Filament\Resources\BrandResource;
 use Lunar\Panel\Filament\Resources\ChannelResource;
 use Lunar\Panel\Filament\Resources\CollectionGroupResource;
 use Lunar\Panel\Filament\Resources\CollectionResource;
-use Lunar\Panel\Filament\Resources\CurrencyResource;
+// use Lunar\Panel\Filament\Resources\CurrencyResource;
 use Lunar\Panel\Filament\Resources\CustomerGroupResource;
 use Lunar\Panel\Filament\Resources\CustomerResource;
 use Lunar\Panel\Filament\Resources\DiscountResource;

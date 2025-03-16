@@ -49,7 +49,7 @@ class LunarPanelManager
         Resources\ChannelResource::class,
         Resources\CollectionGroupResource::class,
         Resources\CollectionResource::class,
-        Resources\CurrencyResource::class,
+        // Resources\CurrencyResource::class,
         Resources\CustomerGroupResource::class,
         Resources\CustomerResource::class,
         Resources\DiscountResource::class,

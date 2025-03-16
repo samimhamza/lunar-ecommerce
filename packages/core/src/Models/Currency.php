@@ -25,7 +25,6 @@ use Stancl\Tenancy\Database\Concerns\BelongsToTenant;
  */
 class Currency extends BaseModel implements Contracts\Currency
 {
-    use BelongsToTenant;
     use HasDefaultRecord;
     use HasFactory;
     use HasMacros;
